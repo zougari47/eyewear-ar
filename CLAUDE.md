@@ -23,7 +23,7 @@ Screenshot with the system Chrome through puppeteer
 For camera mode, make a fake feed from a photo with
 `ffmpeg -loop 1 -i face.jpg -t 6 -vf scale=640:-2 -r 15 -f mjpeg feed.mjpeg`,
 and wait for page `load`, since a live camera never reaches network idle.
-Radix tabs and toggles react to real mouse clicks (`elementHandle.click()`),
+The shadcn tabs and toggles (Base UI) react to real mouse clicks (`elementHandle.click()`),
 not `el.click()`. Software rendering runs at 1–3 fps; that is the test machine.
 
 ## Where things stand (2026-11-15)

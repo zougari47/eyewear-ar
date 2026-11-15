@@ -79,12 +79,11 @@ export default function App() {
             <Sparkles /> open source
           </Badge>
           <ToggleGroup
-            type="single"
             variant="outline"
             className="ml-auto"
-            value={view}
-            onValueChange={(v) => {
-              if (!v) return
+            value={[view]}
+            onValueChange={([v]) => {
+              if (!v) return // clicking the selected one again
               if (v === 'photo' && !photo) pickPhoto()
               setView(v as View)
             }}

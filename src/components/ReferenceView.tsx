@@ -83,17 +83,17 @@ export function ReferenceView({ settings, frameUrl, onModelInfo }: Props) {
       </div>
       <div className="bg-background/85 absolute right-4 bottom-4 left-4 mx-auto grid max-w-2xl gap-4 rounded-xl border p-4 backdrop-blur sm:grid-cols-[1fr_1fr_1fr_auto]">
         <Control label="Turn" value={`${yaw}°`}>
-          <Slider min={-90} max={90} step={1} value={[yaw]} onValueChange={([v]) => setYaw(v)} />
+          <Slider min={-90} max={90} step={1} value={yaw} onValueChange={(v) => setYaw(v as number)} />
         </Control>
         <Control label="Tilt" value={`${pitch}°`}>
-          <Slider min={-30} max={30} step={1} value={[pitch]} onValueChange={([v]) => setPitch(v)} />
+          <Slider min={-30} max={30} step={1} value={pitch} onValueChange={(v) => setPitch(v as number)} />
         </Control>
         <Control label="Distance" value={`${distance} cm`}>
-          <Slider min={20} max={70} step={1} value={[distance]} onValueChange={([v]) => setDistance(v)} />
+          <Slider min={20} max={70} step={1} value={distance} onValueChange={(v) => setDistance(v as number)} />
         </Control>
         <div className="space-y-2">
           <Label className="text-xs">Head</Label>
-          <ToggleGroup type="single" variant="outline" size="sm" value={head} onValueChange={(v) => v && setHead(v as Head)}>
+          <ToggleGroup variant="outline" size="sm" value={[head]} onValueChange={([v]) => v && setHead(v as Head)}>
             <ToggleGroupItem value="solid">Solid</ToggleGroupItem>
             <ToggleGroupItem value="wire">Wire</ToggleGroupItem>
             <ToggleGroupItem value="none">None</ToggleGroupItem>

@@ -54,11 +54,10 @@ export function SettingsPanel({ settings, onChange, onReset }: Props) {
       <Section title="Debug">
         <Row title="Show the head" text="Draws the invisible head that hides the temples, to check how it fits the face.">
           <ToggleGroup
-            type="single"
             variant="outline"
             size="sm"
-            value={settings.debugHead}
-            onValueChange={(v) => v && set('debugHead', v as DebugHead)}
+            value={[settings.debugHead]}
+            onValueChange={([v]) => v && set('debugHead', v as DebugHead)}
           >
             <ToggleGroupItem value="off">Off</ToggleGroupItem>
             <ToggleGroupItem value="wire">Wire</ToggleGroupItem>
@@ -88,11 +87,10 @@ export function SettingsPanel({ settings, onChange, onReset }: Props) {
         ))}
         <Row title="Run the tracker on" text="The graphics card is faster; the processor works everywhere. Falls back to the processor by itself.">
           <ToggleGroup
-            type="single"
             variant="outline"
             size="sm"
-            value={settings.delegate}
-            onValueChange={(v) => v && set('delegate', v as 'GPU' | 'CPU')}
+            value={[settings.delegate]}
+            onValueChange={([v]) => v && set('delegate', v as 'GPU' | 'CPU')}
           >
             <ToggleGroupItem value="GPU">GPU</ToggleGroupItem>
             <ToggleGroupItem value="CPU">CPU</ToggleGroupItem>
