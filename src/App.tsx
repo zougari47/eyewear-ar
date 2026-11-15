@@ -12,7 +12,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { BASE, frameFromFile, loadFrames, type Frame } from '@/lib/models'
-import { initialSettings, type Settings } from '@/lib/settings'
+import { defaultSettings, forgetSettings, initialSettings, rememberChanges, type Settings } from '@/lib/settings'
 
 type View = 'camera' | 'photo' | 'reference'
 
@@ -176,7 +176,17 @@ export default function App() {
                 />
               </TabsContent>
               <TabsContent value="settings">
-                <SettingsPanel settings={settings} onChange={setSettings} />
+                <SettingsPanel
+                  settings={settings}
+                  onChange={(next) => {
+                    rememberChanges(settings, next)
+                    setSettings(next)
+                  }}
+                  onReset={() => {
+                    forgetSettings()
+                    setSettings(defaultSettings)
+                  }}
+                />
               </TabsContent>
               <TabsContent value="about">
                 <AboutPanel />

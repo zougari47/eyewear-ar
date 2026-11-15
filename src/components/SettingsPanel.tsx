@@ -1,12 +1,16 @@
+import { RotateCcw } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Switch } from '@/components/ui/switch'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import type { DebugHead, Settings } from '@/lib/settings'
+import { isDefault, type DebugHead, type Settings } from '@/lib/settings'
 
 interface Props {
   settings: Settings
   onChange: (settings: Settings) => void
+  /** Back to the defaults, forgetting what was remembered. */
+  onReset: () => void
 }
 
 type BoolKey = { [K in keyof Settings]: Settings[K] extends boolean ? K : never }[keyof Settings]
@@ -42,7 +46,7 @@ const TRACKING: { key: BoolKey; title: string; text: string }[] = [
   },
 ]
 
-export function SettingsPanel({ settings, onChange }: Props) {
+export function SettingsPanel({ settings, onChange, onReset }: Props) {
   const set = <K extends keyof Settings>(key: K, value: Settings[K]) => onChange({ ...settings, [key]: value })
 
   return (
@@ -95,6 +99,14 @@ export function SettingsPanel({ settings, onChange }: Props) {
           </ToggleGroup>
         </Row>
       </Section>
+
+      <Separator />
+      <div className="flex items-center justify-between gap-4">
+        <p className="text-muted-foreground text-xs">Your changes are remembered on this device.</p>
+        <Button variant="outline" size="sm" onClick={onReset} disabled={isDefault(settings)}>
+          <RotateCcw data-icon="inline-start" /> Reset to defaults
+        </Button>
+      </div>
     </div>
   )
 }
