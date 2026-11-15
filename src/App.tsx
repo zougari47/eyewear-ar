@@ -37,7 +37,7 @@ export default function App() {
         const wanted = params.get('model')
         setSelected((list.find((f) => f.id === wanted) ?? list[0])?.id ?? '')
       })
-      .catch(() => setFramesError('No frames in public/models/models.json. Upload a .glb below.'))
+      .catch(() => setFramesError('No frames found (models.json). Upload a .glb below.'))
     // the sample photo is optional (kept out of the repository)
     fetch(`${BASE}sample.jpg`, { method: 'HEAD' })
       .then((r) => setHasSample(r.ok && (r.headers.get('content-type') ?? '').startsWith('image/')))

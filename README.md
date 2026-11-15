@@ -16,7 +16,8 @@ React, Tailwind and shadcn/ui around the core:
 
 - **Camera**, **Photo** and **Reference head** (the glasses on MediaPipe's
   model face, turned with sliders, no camera needed)
-- **Frames**: the models in `public/models/models.json`, plus your own `.glb`
+- **Frames**: the models listed in `models.json` at `VITE_MODELS_URL` (a Vercel
+  Blob store; without it, `public/models/`), plus your own `.glb`
   (button or drag and drop), with a model check against the convention below
 - **Settings**: every part of the core can be switched live: debug head (wire
   or solid), live measurements, hiding behind the head, face shadow, matching

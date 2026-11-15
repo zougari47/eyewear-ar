@@ -31,9 +31,17 @@ not `el.click()`. Software rendering runs at 1–3 fps; that is the test machine
 - Public on GitHub, MIT licence. Commit and push only when the user asks.
 - pnpm, with a global `minimum-release-age` of 7 days: a version newer than
   that will not install. Pick an older one instead of adding an exclusion.
-- 3D models (`public/models/`) and photos (`public/sample.jpg`) are only on
-  this machine and are gitignored. Ask the user which glasses may go public
-  before committing any: the wayfarer models come from shop photos.
+- 3D models are not in this repo. The originals (all seven, with their
+  `models.json`) are in `~/projects/personal/youzar/app/public/models/`.
+  Ask the user which glasses may go public before committing or uploading
+  any: the wayfarer models come from shop photos.
+- Deployed on Vercel from GitHub pushes. The site's frames come from a public
+  Vercel Blob store: `VITE_MODELS_URL` (set in the Vercel project) points at
+  it, here and in `.env.local` (gitignored); without it the app falls back
+  to `public/models/`, which is now empty. Published so far, uploaded
+  by hand at the store's top level: real-01 as classic-grey, wayfarer-01 as
+  bold-black, wayfarer-ai as bold-black-ai, plus their `models.json`. Blob
+  caches files for 30 days, so a changed model needs a new file name.
 - Known bug: temples made of more than one material (`aviator-01`) load as a
   group whose child meshes have other names, so the renderer does not treat
   them as temples (no swing, no fade). The Model check shows it.

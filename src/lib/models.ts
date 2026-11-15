@@ -18,12 +18,20 @@ interface ListedFrame extends Omit<Frame, 'url'> {
 
 export const BASE = import.meta.env.BASE_URL
 
-/** The frames listed in public/models/models.json. */
+/**
+ * Where models.json and the .glb files live: VITE_MODELS_URL (a Vercel Blob
+ * store, set in .env.local and in the Vercel project), else public/models/.
+ */
+const MODELS_URL: string = import.meta.env.VITE_MODELS_URL || `${BASE}models/`
+
+/** The frames listed in models.json. */
 export async function loadFrames(): Promise<Frame[]> {
-  const r = await fetch(`${BASE}models/models.json`)
+  // revalidate every visit: Blob serves files with a 30-day cache, and the
+  // list is what changes when frames are added or removed
+  const r = await fetch(`${MODELS_URL}models.json`, { cache: 'no-cache' })
   if (!r.ok) throw new Error(`HTTP ${r.status}`)
   const data = (await r.json()) as { models: ListedFrame[] }
-  return data.models.map(({ file, ...m }) => ({ ...m, url: `${BASE}models/${file}` }))
+  return data.models.map(({ file, ...m }) => ({ ...m, url: `${MODELS_URL}${file}` }))
 }
 
 export function frameFromFile(file: File): Frame {

@@ -10,3 +10,8 @@ public/models/
 *.jpg
 *.jpeg
 *.png
+
+# Vercel project link (`vercel link`)
+.vercel/
+.vercel
+.env*
